@@ -8,34 +8,28 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * 단위 테스트
+ * Spring 통합 테스트
  */
-class MemberServiceTest {
-  MemberService memberService;
-  MemberRepository memberRepository;
+@SpringBootTest
+@Transactional // 다음 테스트에 영향을 주지 않는다.
+class MemberServiceIntergrationTest {
 
-  @BeforeEach
-  void setUp() {
-    memberRepository = new MemoryMemberRepository();
-    memberService = new MemberService(memberRepository);
-  }
-
-  @AfterEach
-  void tearDown() {
-    memberRepository.clearStore();
-  }
+  @Autowired MemberService memberService; // test case 에서는 필드 주입도 가능, 딴데서 안 쓰니까
+  @Autowired MemberRepository memberRepository;
 
   @DisplayName("회원가입")
   @Test
   void join() {
     // given
     Member member = new Member();
-    member.setName("hello");
-
+    member.setName("spring");
     // when
     Long saveId = memberService.join(member);
 
@@ -59,31 +53,5 @@ class MemberServiceTest {
     memberService.join(member1);
     IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
     Assertions.assertThat(e.getMessage()).isEqualTo("Already exist name.");
-//    try {
-//      memberService.join(member2);
-//      fail();
-//    } catch (IllegalStateException e) {
-//      Assertions.assertThat(e.getMessage()).isEqualTo("Already exist name.");
-//    }
-  }
-
-  @DisplayName("전체 회원 조회")
-  @Test
-  void findMembers() {
-    // given
-
-    // when
-
-    // then
-  }
-
-  @DisplayName("회원 조회")
-  @Test
-  void findOne() {
-    // given
-
-    // when
-
-    // then
   }
 }
