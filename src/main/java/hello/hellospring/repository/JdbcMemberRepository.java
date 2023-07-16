@@ -166,9 +166,4 @@ public class JdbcMemberRepository implements MemberRepository {
   private void close(Connection conn) throws SQLException {
     DataSourceUtils.releaseConnection(conn, dataSource); // 커넥션 했으면 같은 놈이 릴리즈 해준다.
   }
-
-  @Override
-  public void clearStore() {
-
-  }
 }

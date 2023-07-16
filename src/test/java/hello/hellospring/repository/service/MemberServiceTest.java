@@ -26,7 +26,7 @@ class MemberServiceTest {
 
   @AfterEach
   void tearDown() {
-    memberRepository.clearStore();
+//    memberRepository.clearStore();
   }
 
   @DisplayName("회원가입")
