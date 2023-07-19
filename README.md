@@ -40,3 +40,9 @@ API: json 데이터 포맷으로 전달 서버끼리 통신하거나... 데이�
 ## H2 console
 Console URL `http://localhost:8082/test.do`
 JDBC URL `jdbc:h2:tcp://localhost/~/test`
+
+
+## AOP
+* 공통 관심 사항(cross-cutting concern) vs 핵심 관심 사항(core concern)을 분리한다.
+* Aspect Oriented Programming
+* 
